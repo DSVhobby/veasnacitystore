@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSV CITYSTORE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0b6b3a;
+            --primary-hover: #08522d;
+            --accent-red: #e63946;
+            --bg-light: #f8f9fa;
+            --card-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: 'Kantumruy Pro', 'Poppins', sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        .navbar-custom {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 12px 0;
+        }
+
+        .navbar-nav .nav-link {
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-right: 18px;
+            transition: color var(--transition-speed);
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .search-box .form-control {
+            border-radius: 8px 0 0 8px;
+            border: 1px solid #ced4da;
+            padding: 8px 16px;
+        }
+
+        .search-box .btn-search {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 0 8px 8px 0;
+            padding: 8px 20px;
+            border: 1px solid var(--primary-color);
+            transition: all var(--transition-speed);
+        }
+
+        .search-box .btn-search:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            color: #fff;
+        }
+
+        
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 35px 0 25px 0;
+            position: relative;
+        }
+
+        
+        .hero-banner {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-top: 20px;
+        }
+
+        .hero-banner .carousel-item {
+            height: 380px;
+        }
+
+        .hero-banner img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        
+        .category-card {
+            background: #ffffff;
+            border: 1px solid #eef2f5;
+            border-radius: 12px;
+            padding: 20px 10px;
+            text-align: center;
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            height: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--card-shadow);
+            border-color: var(--primary-color);
+        }
+
+        .category-img-wrapper {
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            padding: 5px;
+        }
+
+        .category-img-wrapper img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform var(--transition-speed);
+        }
+
+        .category-card:hover .category-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .category-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #2b2b2b;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        
+        .product-card {
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            position: relative;
+            transition: all var(--transition-speed) ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            box-shadow: var(--card-shadow);
+            transform: translateY(-4px);
+            border-color: #d0d7de;
+        }
+
+        .product-img-container {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .product-img-container img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform var(--transition-speed);
+        }
+
+        .product-card:hover .product-img-container img {
+            transform: scale(1.06);
+        }
+
+        .product-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #222;
+            margin: 0;
+        }
+
+        .hot-badge {
+            background-color: var(--accent-red);
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.75; }
+            100% { opacity: 1; }
+        }
+
+        .product-specs {
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            background: #f9fafb;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .product-specs div {
+            margin-bottom: 2px;
+        }
+
+        .price-tag {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        .btn-buy {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color var(--transition-speed);
+        }
+
+        .btn-buy:hover {
+            background-color: var(--primary-hover);
+            color: #fff;
+        }
+
+        
+        .slider-wrapper {
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .custom-carousel-control {
+            width: 42px;
+            height: 42px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            border: 1px solid #000;
+            color: #0b6b3a;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.9;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-speed);
+        }
+
+        .custom-carousel-control:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            opacity: 1;
+            border-color: var(--primary-color);
+        }
+
+        .custom-carousel-control.prev {
+            left: -15px;
+        }
+
+        .custom-carousel-control.next {
+            right: -15px;
+        }
+
+        .carousel-indicators-custom {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .carousel-indicators-custom button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background-color: #cbd5e1;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .carousel-indicators-custom button.active {
+            background-color: #007bff;
+            width: 24px;
+            border-radius: 12px;
+        }
+
+        .phone-contact {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #444;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e293b;
+            color: #cbd5e1;
+            padding: 40px 0 20px 0;
+            margin-top: 60px;
+        }
+
+        footer h5 {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold text-success" href="#">
+                <i class="fa-solid fa-laptop-code me-2 fs-3"></i>
+                <span>DSV CITYSTORE</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">ទំព័រដើម</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">ផលិតផល</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">អំពីយើង</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">ទំនាក់ទំនង</a>
+                    </li>
+                </ul>
+
+                
+                <form class="d-flex search-box" role="search" onsubmit="event.preventDefault();">
+                    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+                    <button class="btn btn-search" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <div id="heroCarousel" class="carousel slide hero-banner" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="4000">
+                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=1400&q=80" alt="Tech Setup Banner 1">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1400&q=80" alt="Tech Setup Banner 2">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1400&q=80" alt="Tech Setup Banner 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+       
+        <h2 class="section-title">ប្រភេទផលិតផល</h2>
+        <div class="row g-3">
+            
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="category-card">
+                    <div class="category-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Laptop">
+                    </div>
+                    <h3 class="category-title">LAPTOP</h3>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="category-card">
+                    <div class="category-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=400&q=80" alt="Accessory">
+                    </div>
+                    <h3 class="category-title">ACCESSORY</h3>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="category-card">
+                    <div class="category-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=400&q=80" alt="Desktop">
+                    </div>
+                    <h3 class="category-title">DESKTOP</h3>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="category-card">
+                    <div class="category-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=400&q=80" alt="Monitor">
+                    </div>
+                    <h3 class="category-title">MONITOR</h3>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="category-card">
+                    <div class="category-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=400&q=80" alt="Components">
+                    </div>
+                    <h3 class="category-title">COMPONENTS</h3>
+                </div>
+            </div>
+           
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="category-card">
+                    <div class="category-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80" alt="Network">
+                    </div>
+                    <h3 class="category-title">NETWORK</h3>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="phone-contact mt-5">
+            PHONE NUMBER: 017265453
+        </div>
+
+        
+        <h2 class="section-title mt-2">ផលិតផលបញ្ចុះតម្លៃ</h2>
+
+        <div class="slider-wrapper">
+            <div id="productCarousel" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-inner">
+                   
+                    <div class="carousel-item active">
+                        <div class="row g-3">
+                            
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Laptop 1">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP1</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i7</div>
+                                        <div>SSD: 512</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$899.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                           
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=400&q=80" alt="Laptop 2">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP1</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i7</div>
+                                        <div>SSD: 512</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$899.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=400&q=80" alt="Laptop 3">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP1</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i7</div>
+                                        <div>SSD: 512</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$899.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=80" alt="Laptop 4">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP1</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i7</div>
+                                        <div>SSD: 512</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$899.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                          
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=400&q=80" alt="Laptop 5">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP1</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i7</div>
+                                        <div>SSD: 512</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$899.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=400&q=80" alt="Laptop 6">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP1</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i7</div>
+                                        <div>SSD: 512</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$899.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="carousel-item">
+                        <div class="row g-3">
+                            
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Laptop 7">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP2</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i9</div>
+                                        <div>SSD: 1TB</div>
+                                        <div>Ram: 32G</div>
+                                    </div>
+                                    <div class="price-tag">$1,299.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=400&q=80" alt="Laptop 8">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP2</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i5</div>
+                                        <div>SSD: 512</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$699.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=400&q=80" alt="Laptop 9">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP2</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i7</div>
+                                        <div>SSD: 1TB</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$999.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                          
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=400&q=80" alt="Laptop 10">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP2</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i7</div>
+                                        <div>SSD: 512</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$899.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=400&q=80" alt="Laptop 11">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP2</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: Ryzen 7</div>
+                                        <div>SSD: 512</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$849.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                                <div class="product-card">
+                                    <div class="product-img-container">
+                                        <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=400&q=80" alt="Laptop 12">
+                                    </div>
+                                    <div class="product-header">
+                                        <span class="product-title">LAPTOP2</span>
+                                        <span class="hot-badge">HOT SELL</span>
+                                    </div>
+                                    <div class="product-specs">
+                                        <div>CPU: core i7</div>
+                                        <div>SSD: 512</div>
+                                        <div>Ram: 16G</div>
+                                    </div>
+                                    <div class="price-tag">$899.00</div>
+                                    <button class="btn btn-buy"><i class="fa-solid fa-cart-shopping me-1"></i> ទិញឥឡូវ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev custom-carousel-control prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                    <i class="fa-solid fa-chevron-left fs-5"></i>
+                </button>
+                <button class="carousel-control-next custom-carousel-control next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                    <i class="fa-solid fa-chevron-right fs-5"></i>
+                </button>
+
+                
+                <div class="carousel-indicators-custom">
+                    <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                    <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="3"></button>
+                    <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="4"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-success fw-bold"><i class="fa-solid fa-laptop-code me-2"></i>DSV CITYSTORE</h5>
+                    <p class="small text-muted">ហាងលក់កុំព្យូទ័រ និងឧបករណ៍អេឡិចត្រូនិកគ្រប់ប្រភេទដែលមានគុណភាពខ្ពស់ និងតម្លៃសមរម្យ។</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>ព័ត៌មានទំនាក់ទំនង</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><i class="fa-solid fa-phone me-2 text-success"></i> 017265453</li>
+                        <li class="mb-2"><i class="fa-solid fa-envelope me-2 text-success"></i> dsv317089@gmail.com</li>
+                        <li class="mb-2"><i class="fa-solid fa-location-dot me-2 text-success"></i> ក្រោមមេឃ​ លើដី</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>តាមដានយើង</h5>
+                    <div class="d-flex gap-3 fs-5">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <div class="text-center small text-muted">
+                
+            </div>
